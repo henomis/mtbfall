@@ -1,7 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                      "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-</head>
-<body>
-prova
-</body>
+  <head>
+    <title>Volume Up Button Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    var value;
+    var display;
+
+
+    // Wait for device API libraries to load
+    //
+    function onLoad() {
+	value = 0;
+	display = document.getElementById('display');
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Register the event listener
+        document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
+        document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
+    }
+
+    // Handle the volume up button
+    //
+    function onVolumeUpKeyDown() {
+	value +=1;
+	display.innerHTML = value;
+    }
+
+    function onVolumeDownKeyDown() {
+	value -=1;
+	display.innerHTML = value;
+    }
+
+    </script>
+  </head>
+  <body onload="onLoad()">
+<div id="display">000</display>
+  </body>
 </html>
+
