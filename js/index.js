@@ -16,10 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-    // The watch id references the current `watchAcceleration`
+   // The watch id references the current `watchAcceleration`
     var watchID = null;
+      // Randomly add a data point every 500ms
+      var chartsx =  null;
+      var chartsy =  null; 
+      var chartsz =  null;
 
+      function createTimeline() {
+        var chartxx = new SmoothieChart();
+        var chartyy = new SmoothieChart();
+        var chartzz = new SmoothieChart();
+        chartxx.addTimeSeries(chartsx, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+        chartyy.addTimeSeries(chartsy, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+        chartzz.addTimeSeries(chartsz, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+        chartxx.streamTo(document.getElementById("chartxx"), 500);
+        chartyy.streamTo(document.getElementById("chartyy"), 500);
+        chartzz.streamTo(document.getElementById("chartzz"), 500);
+      }
+
+
+    // Start watching the acceleration
+    //
     function startWatch() {
 
         // Update acceleration every 3 seconds
@@ -45,13 +63,17 @@
                             'Acceleration Y: ' + acceleration.y + '<br />' +
                             'Acceleration Z: ' + acceleration.z + '<br />' +
                             'Timestamp: '      + acceleration.timestamp + '<br />';
-    }
+    	chartsx.append(new Date().getTime(), acceleration.x);
+	chartsy.append(new Date().getTime(), acceleration.y);
+	chartsz.append(new Date().getTime(), acceleration.z);
+}
 
     // onError: Failed to get the acceleration
     //
     function onError() {
         alert('onError!');
     }
+ 
 var app = {
     // Application Constructor
     initialize: function() {
@@ -71,7 +93,12 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         startWatch();
-    },
+	createTimeline();
+      // Randomly add a data point every 500ms
+      chartsx = new TimeSeries();
+      chartsy = new TimeSeries();
+      chartsz = new TimeSeries();
+},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
