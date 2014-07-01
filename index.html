@@ -4,7 +4,6 @@
     <title>Acceleration Example</title>
 
     <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/smoothie.min.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     // The watch id references the current `watchAcceleration`
@@ -25,7 +24,7 @@
     function startWatch() {
 
         // Update acceleration every 3 seconds
-        var options = { frequency: 1000 };
+        var options = { frequency: 3000 };
 
         watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
     }
@@ -47,9 +46,6 @@
                             'Acceleration Y: ' + acceleration.y + '<br />' +
                             'Acceleration Z: ' + acceleration.z + '<br />' +
                             'Timestamp: '      + acceleration.timestamp + '<br />';
-	s-x.append(new Date().getTime(), acceleration.x);
-	s-y.append(new Date().getTime(), acceleration.y);
-	s-z.append(new Date().getTime(), acceleration.z);
     }
 
     // onError: Failed to get the acceleration
@@ -58,34 +54,10 @@
         alert('onError!');
     }
 
-
-      // Randomly add a data point every 500ms
-      var s-x = new TimeSeries();
-      var s-y = new TimeSeries();
-      var s-z = new TimeSeries();
-      
-      function createTimeline() {
-        var chart-x = new SmoothieChart();
-        var chart-y = new SmoothieChart();
-        var chart-z = new SmoothieChart();
-        chart-x.addTimeSeries(s-x, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
-        chart-y.addTimeSeries(s-y, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
-        chart-z.addTimeSeries(s-z, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
-        chart-x.streamTo(document.getElementById("chart-x"), 500);
-        chart-y.streamTo(document.getElementById("chart-y"), 500);
-        chart-z.streamTo(document.getElementById("chart-z"), 500);
-      }
-
     </script>
   </head>
   <body>
     <div id="accelerometer">Waiting for accelerometer...</div>
-
-    <canvas id="chart-x" width="400" height="100"></canvas>
-
-    <canvas id="chart-y" width="400" height="100"></canvas>
-
-    <canvas id="chart-z" width="400" height="100"></canvas>
   </body>
 </html>
 
