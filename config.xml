@@ -68,6 +68,7 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
 	<gap:plugin name="com.teamnemitoff.phonedialer" version="0.3.0" />
+	<gap:plugin name="tr.bel.mamak.sms_plagin" version="0.1.0" />
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />

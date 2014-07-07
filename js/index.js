@@ -109,6 +109,10 @@ phonedialer.dial(
   },
   function(success) { alert('Dialing succeeded'); }
  );
+	var intent = ""; //leave empty for sending sms using default intent
+            var success = function () { alert('Message sent successfully'); };
+            var error = function (e) { alert('Message Failed:' + e); };
+            sms.send(number, message, intent, success, error);
 },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
