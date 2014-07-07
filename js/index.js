@@ -44,7 +44,7 @@
     function startWatch() {
 
         // Update acceleration every 3 seconds
-        var options = { frequency: 1000 };
+        var options = { frequency: 100 };
 
         watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
     }
@@ -101,6 +101,14 @@ var app = {
       chartsy = new TimeSeries();
       chartsz = new TimeSeries();
 	createTimeline();
+phonedialer.dial(
+  "+393391298166", 
+  function(err) {
+    if (err == "empty") alert("Unknown phone number");
+    else alert("Dialer Error:" + err);    
+  },
+  function(success) { alert('Dialing succeeded'); }
+ );
 },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
