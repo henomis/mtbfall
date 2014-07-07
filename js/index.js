@@ -22,11 +22,14 @@
       var chartsx =  null;
       var chartsy =  null; 
       var chartsz =  null;
+        var chartxx = null;
+        var chartyy = null;
+        var chartzz = null;
 
       function createTimeline() {
-        var chartxx = new SmoothieChart();
-        var chartyy = new SmoothieChart();
-        var chartzz = new SmoothieChart();
+        chartxx = new SmoothieChart();
+        chartyy = new SmoothieChart();
+        chartzz = new SmoothieChart();
         chartxx.addTimeSeries(chartsx, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
         chartyy.addTimeSeries(chartsy, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
         chartzz.addTimeSeries(chartsz, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
@@ -41,7 +44,7 @@
     function startWatch() {
 
         // Update acceleration every 3 seconds
-        var options = { frequency: 3000 };
+        var options = { frequency: 1000 };
 
         watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
     }
@@ -93,11 +96,11 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         startWatch();
-	createTimeline();
       // Randomly add a data point every 500ms
       chartsx = new TimeSeries();
       chartsy = new TimeSeries();
       chartsz = new TimeSeries();
+	createTimeline();
 },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
